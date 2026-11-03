@@ -116,11 +116,9 @@ ul, ol { list-style: none; }
 .fadelist { display: flex; flex-wrap: wrap; gap: 1.6vw; margin-top: 2vh; color: var(--muted); }
 .fadelist li { position: relative; opacity: 0; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; }
 .fadelist li::after { content: ''; position: absolute; left: 10px; right: 10px; top: 50%; height: 1px; background: var(--coral); transform: scaleX(0); transform-origin: left; }
-.slide.is-in .fadelist li { animation: appear .8s var(--e) calc(1.7s + var(--k) * .12s) forwards, die 1.2s ease calc(4.4s + var(--k) * .55s) forwards; }
-.slide.is-in .fadelist li::after { animation: strike .6s var(--e2) calc(4.4s + var(--k) * .55s) forwards; }
+.fadelist li::after { display: none; }
+.slide.is-in .fadelist li { animation: appear .8s var(--e) calc(1.7s + var(--k) * .12s) forwards; }
 @keyframes appear { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes die { to { opacity: .16; filter: blur(1.5px); } }
-@keyframes strike { to { transform: scaleX(1); } }
 
 /* ───────── argument slides ───────── */
 .num { font-family: var(--display); font-weight: 800; font-size: clamp(4rem, 9vw, 8.4rem); line-height: .8; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px var(--accent); }
