@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Why education is the most valuable asset</title>
+<meta name="description" content="A short presentation: three reasons why education is the most valuable asset we have.">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307070a'/%3E%3Cpath d='M32 14 8 26l24 12 24-12Z' fill='%23ffc247'/%3E%3Cpath d='M18 33v10c0 4 6 8 14 8s14-4 14-8V33l-14 7Z' fill='%23ffc247' opacity='.75'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- persistent background: ink + two orbs that flow from slide to slide -->
+<div class="bg" aria-hidden="true">
+  <i class="orb orb--1" id="orb1"></i>
+  <i class="orb orb--2" id="orb2"></i>
+</div>
+
+<main class="deck" id="deck">
+
+  <!-- ═════════ 01 · TITLE ═════════ -->
+  <section class="slide s1" data-title="Intro" data-accent="gold" aria-label="Slide 1: Title">
+    <canvas class="fx" aria-hidden="true"></canvas>
+    <div class="ghost" aria-hidden="true"><span>ASSET</span></div>
+    <div class="wrap">
+      <p class="kicker mono" data-a="fade" style="--d:.35s"><i></i>Presentation</p>
+      <h1 class="display display--xl" data-split style="--d:.45s">Why <em>education</em> is the most <em>valuable asset</em></h1>
+      <p class="lead" data-a="up" style="--d:1.5s">Three reasons it matters more than anything we own.</p>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__in">
+        <span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b><span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b>
+        <span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b><span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 02 · VIDEO ═════════ -->
+  <section class="slide s2" data-title="The question" data-accent="gold" aria-label="Slide 2: Video">
+    <div class="wrap wrap--split">
+      <div class="col">
+        <p class="kicker mono" data-a="fade" style="--d:.3s"><i></i>Before we start</p>
+        <h2 class="display" data-split style="--d:.4s">Is education really <em>necessary</em>?</h2>
+        <p class="lead" data-a="up" style="--d:1.1s">Press play. Then let’s see what the world would look like without it.</p>
+        <a class="yt mono" data-a="fade" style="--d:1.4s" href="https://www.youtube.com/shorts/mZ8RFwmr3wU" target="_blank" rel="noopener">Can’t see the video? Open on YouTube ↗</a>
+      </div>
+      <div class="phone" data-a="zoom" style="--d:.5s">
+        <div class="phone__glow" aria-hidden="true"></div>
+        <div class="phone__screen">
+          <iframe id="ytFrame" title="Intro video" data-src="https://www.youtube.com/embed/mZ8RFwmr3wU?rel=0&playsinline=1&enablejsapi=1&modestbranding=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 03 · WITHOUT EDUCATION ═════════ -->
+  <section class="slide s3" data-title="Without it" data-accent="ice" aria-label="Slide 3: What would our world look like without education">
+    <canvas class="fx" aria-hidden="true"></canvas>
+    <div class="shade" aria-hidden="true"></div>
+    <div class="wrap wrap--center">
+      <p class="kicker mono" data-a="fade" style="--d:.3s"><i></i>Imagine</p>
+      <h2 class="display display--xl" data-split style="--d:.4s">What would our world look like <em>without</em> education?</h2>
+      <ul class="fadelist mono" aria-hidden="true">
+        <li style="--k:0">Medicine</li><li style="--k:1">Technology</li><li style="--k:2">Economy</li><li style="--k:3">Science</li><li style="--k:4">Progress</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═════════ 04 · ARGUMENT 1 ═════════ -->
+  <section class="slide arg s4" data-title="Argument 1" data-accent="gold" aria-label="Slide 4: Argument 1">
+    <div class="wrap wrap--arg">
+      <p class="num" aria-hidden="true" data-a="slam" style="--d:.2s">01</p>
+      <p class="kicker mono" data-a="fade" style="--d:.4s"><i></i>Argument 01</p>
+      <h2 class="display display--lg" data-split style="--d:.5s">Education builds a <em>strong and resilient</em> economy</h2>
+      <p class="lead" data-a="up" style="--d:1.3s">Higher education creates a flexible and crisis-resistant national economy.</p>
+    </div>
+    <figure class="viz viz--chart" data-a="fade" style="--d:.6s" aria-hidden="true">
+      <svg id="chart" viewBox="0 0 760 440">
+        <defs>
+          <linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc247" stop-opacity=".38"/><stop offset="1" stop-color="#ffc247" stop-opacity="0"/></linearGradient>
+          <clipPath id="areaClip"><rect id="areaRect" x="0" y="0" width="0" height="440"/></clipPath>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g class="c-grid" id="cGrid"></g>
+        <rect class="c-crisis" id="cCrisis" rx="6"/>
+        <text class="c-crisis-t mono" id="cCrisisT">CRISIS</text>
+        <path id="cArea" class="c-area" clip-path="url(#areaClip)"/>
+        <path id="cRes" class="c-line c-line--res"/>
+        <path id="cEdu" class="c-line c-line--edu" filter="url(#glow)"/>
+        <circle id="cDotRes" class="c-dot c-dot--res" r="5"/>
+        <circle id="cDotEdu" class="c-dot c-dot--edu" r="7" filter="url(#glow)"/>
+        <text class="c-lab c-lab--edu mono" id="cLabEdu">Education-driven economy</text>
+        <text class="c-lab c-lab--res mono" id="cLabRes">Resource-only economy</text>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ═════════ 05 · ARGUMENT 2 ═════════ -->
+  <section class="slide arg s5" data-title="Argument 2" data-accent="mint" aria-label="Slide 5: Argument 2">
+    <canvas class="fx" aria-hidden="true"></canvas>
+    <div class="wrap wrap--arg">
+      <p class="num" aria-hidden="true" data-a="slam" style="--d:.2s">02</p>
+      <p class="kicker mono" data-a="fade" style="--d:.4s"><i></i>Argument 02</p>
+      <h2 class="display display--lg" data-split style="--d:.5s">Education provides a <em>system</em>, not chaos</h2>
+      <p class="lead" data-a="up" style="--d:1.1s">Higher education teaches people how to organize information into a clear system instead of consuming random facts.</p>
+    </div>
+  </section>
+
+  <!-- ═════════ 06 · ARGUMENT 3 ═════════ -->
+  <section class="slide arg s6" data-title="Argument 3" data-accent="coral" aria-label="Slide 6: Argument 3">
+    <div class="wrap wrap--arg">
+      <p class="num" aria-hidden="true" data-a="slam" style="--d:.2s">03</p>
+      <p class="kicker mono" data-a="fade" style="--d:.4s"><i></i>Argument 03</p>
+      <h2 class="display display--lg" data-split style="--d:.5s">Education as a <em>social elevator</em>: from background to breakthrough</h2>
+      <p class="lead" data-a="up" style="--d:1.4s">Quality education reduces social inequality by working as a powerful social elevator for talented youth.</p>
+    </div>
+    <figure class="viz viz--lift" data-a="fade" style="--d:.6s" aria-hidden="true">
+      <svg id="lift" viewBox="0 0 520 560">
+        <defs>
+          <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect class="l-shaft" x="170" y="30" width="180" height="500" rx="16"/>
+        <g id="lFloors"></g>
+        <line id="lCable" class="l-cable" x1="260" y1="30" x2="260" y2="440"/>
+        <g id="lCab" class="l-cab">
+          <rect class="l-cab__box" x="185" y="0" width="150" height="84" rx="10"/>
+          <line class="l-cab__door" x1="260" y1="8" x2="260" y2="84"/>
+          <g class="l-pass" filter="url(#glow2)"><circle cx="260" cy="38" r="9"/><path d="M243 76c0-11 8-19 17-19s17 8 17 19Z"/></g>
+        </g>
+        <g id="lBurst" class="l-burst"></g>
+        <text class="l-lab l-lab--bot mono" x="22" y="522">BACKGROUND</text>
+        <text class="l-lab l-lab--top mono" x="22" y="60">BREAKTHROUGH</text>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ═════════ 07 · PHOTO ═════════ -->
+  <section class="slide s7" data-title="The answer" data-accent="paper" aria-label="Slide 7: Photo">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="rib rib--a" aria-hidden="true"><div class="rib__in">
+      <span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b><span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b>
+      <span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b><span>Education</span><b>✦</b><span>Asset</span><b>✦</b><span>Future</span><b>✦</b>
+    </div></div>
+    <div class="rib rib--b" aria-hidden="true"><div class="rib__in">
+      <span>Knowledge</span><b>✦</b><span>Growth</span><b>✦</b><span>Opportunity</span><b>✦</b><span>Knowledge</span><b>✦</b><span>Growth</span><b>✦</b><span>Opportunity</span><b>✦</b>
+      <span>Knowledge</span><b>✦</b><span>Growth</span><b>✦</b><span>Opportunity</span><b>✦</b><span>Knowledge</span><b>✦</b><span>Growth</span><b>✦</b><span>Opportunity</span><b>✦</b>
+    </div></div>
+    <canvas class="fx" aria-hidden="true"></canvas>
+    <div class="halo" data-a="fade" style="--d:.9s" aria-hidden="true">
+      <i class="cb cb--tl"></i><i class="cb cb--tr"></i><i class="cb cb--bl"></i><i class="cb cb--br"></i>
+    </div>
+    <div class="shot" data-a="shot" style="--d:.15s">
+      <img src="assets/elon.png" alt="Photo captioned: How do you like it, Elon Musk?" draggable="false">
+      <i class="sweep" aria-hidden="true"></i>
+    </div>
+  </section>
+
+  <!-- ═════════ 08 · SUMMARY ═════════ -->
+  <section class="slide s8" data-title="To sum up" data-accent="gold" aria-label="Slide 8: Conclusion">
+    <canvas class="fx" aria-hidden="true"></canvas>
+    <div class="wrap wrap--sum">
+      <p class="kicker mono" data-a="fade" style="--d:.3s"><i></i>To sum up</p>
+      <ol class="sum">
+        <li data-a="row" style="--d:.45s; --c:var(--gold)"><span class="mono">01</span><b>A strong economy</b></li>
+        <li data-a="row" style="--d:.65s; --c:var(--mint)"><span class="mono">02</span><b>An organized mind</b></li>
+        <li data-a="row" style="--d:.85s; --c:var(--coral)"><span class="mono">03</span><b>A fair social elevator</b></li>
+      </ol>
+      <p class="closing" data-split style="--d:1.2s">By supporting education today, we create a <em>successful future</em> for everyone.</p>
+      <p class="thanks" data-a="slam" style="--d:2.2s">Thank you.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- liquid transition layer -->
+<canvas class="liquid" id="liquid" aria-hidden="true"></canvas>
+
+<!-- presenter script (N) -->
+<aside class="notes" id="notes" aria-label="Presenter script" hidden>
+  <div class="notes__head mono"><span id="notesTitle">Script</span><button type="button" id="notesClose" aria-label="Close script">✕</button></div>
+  <div class="notes__body" id="notesBody"></div>
+</aside>
+
+<!-- HUD -->
+<header class="hud hud--top">
+  <a class="brand mono" href="#1" id="brand"><i></i>Why education</a>
+  <div class="hud__r">
+    <button class="btn mono" type="button" id="notesBtn" title="Presenter script (N)">Script</button>
+    <button class="btn mono" type="button" id="fsBtn" title="Fullscreen (F)">Fullscreen</button>
+  </div>
+</header>
+<nav class="hud hud--bot" aria-label="Slides">
+  <span class="count mono"><b id="cur">01</b> / <span id="tot">08</span></span>
+  <ul class="dots" id="dots"></ul>
+  <span class="slidename mono" id="slideName">Intro</span>
+  <span class="arrows">
+    <button class="btn btn--sq" type="button" id="prev" aria-label="Previous slide">←</button>
+    <button class="btn btn--sq" type="button" id="next" aria-label="Next slide">→</button>
+  </span>
+</nav>
+<div class="grain" aria-hidden="true"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
