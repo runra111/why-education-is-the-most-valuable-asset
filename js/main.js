@@ -421,6 +421,61 @@ const yt = $('#ytFrame');
 function loadVideo() { if (yt && !yt.src) yt.src = yt.dataset.src; }
 function pauseVideo() { try { yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'); } catch (e) {} }
 
+/* ── video: opens to (almost) full screen on play, folds back when it ends ── */
+const phone = $('.phone');
+const veil = document.createElement('div');
+veil.className = 'veil';
+veil.innerHTML = '<button class="nav veil__x" type="button" aria-label="Close video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
+slides[0].appendChild(veil);
+let vFull = false, vBusy = false, vGhost = null, vState = null;
+const V_MS = 900;
+const setBox = (el, r) => { el.style.left = r.left + 'px'; el.style.top = r.top + 'px'; el.style.width = r.width + 'px'; el.style.height = r.height + 'px'; };
+function vTarget() {
+  const H = Math.min(innerHeight * .94, innerWidth * .94 * 16 / 9), W = H * 9 / 16;
+  return { left: (innerWidth - W) / 2, top: (innerHeight - H) / 2, width: W, height: H };
+}
+function expandVideo() {
+  if (vFull || vBusy || cur !== 0) return;
+  vFull = true; vBusy = true;
+  const r = phone.getBoundingClientRect();
+  vGhost = document.createElement('div'); vGhost.className = 'phone-ph';
+  vGhost.style.width = r.width + 'px'; vGhost.style.height = r.height + 'px';
+  phone.before(vGhost);
+  phone.classList.add('is-fixed'); setBox(phone, r); void phone.offsetWidth;
+  document.body.classList.add('vfull'); veil.classList.add('on');
+  setBox(phone, vTarget());
+  setTimeout(() => { vBusy = false; }, V_MS);
+}
+function collapseVideo(instant) {
+  if (!vFull) return;
+  vFull = false; vBusy = true;
+  veil.classList.remove('on'); document.body.classList.remove('vfull');
+  const done = () => {
+    phone.classList.remove('is-fixed');
+    ['left', 'top', 'width', 'height'].forEach(k => phone.style.removeProperty(k));
+    if (vGhost) { vGhost.remove(); vGhost = null; }
+    vBusy = false;
+  };
+  if (instant) { done(); return; }
+  setBox(phone, vGhost.getBoundingClientRect());
+  setTimeout(done, V_MS + 60);
+}
+function closeVideoByHand() { collapseVideo(); pauseVideo(); vState = 2; }
+veil.addEventListener('click', closeVideoByHand);
+// listen to the YouTube player: 1 = playing, 0 = ended
+yt.addEventListener('load', () => { try { yt.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'); } catch (e) {} });
+addEventListener('message', e => {
+  let host = ''; try { host = new URL(e.origin).hostname; } catch (_) { return; }
+  if (!/(^|\.)youtube(-nocookie)?\.com$/.test(host)) return;
+  let d = e.data;
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch (_) { return; } }
+  if (!d) return;
+  const st = d.event === 'onStateChange' ? d.info : (d.event === 'infoDelivery' && d.info && typeof d.info.playerState === 'number' ? d.info.playerState : null);
+  if (st === null || st === vState) return;
+  vState = st;
+  if (st === 1) expandVideo(); else if (st === 0) collapseVideo();
+});
+
 /* ───────────────── navigation ───────────────── */
 let cur = 0, busy = true, queued = null, shown = 0, enterT = 0;
 
@@ -438,6 +493,7 @@ function activate(i) {
 
 function go(to) {
   if (to < 0 || to >= N || to === cur) return;
+  if (vFull || vBusy) return;
   if (busy) { queued = to; return; }
   busy = true;
   const dir = to > cur ? 1 : -1;
@@ -464,7 +520,7 @@ addEventListener('keydown', e => {
   else if (k === 'End') go(N - 1);
   else if (k === 'f' || k === 'F') toggleFs();
   else if (k === 'n' || k === 'N') toggleNotes();
-  else if (k === 'Escape') toggleNotes(false);
+  else if (k === 'Escape') { toggleNotes(false); if (vFull) closeVideoByHand(); }
   else if (/^[1-9]$/.test(k)) go(+k - 1);
 });
 let lastWheel = 0;
