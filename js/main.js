@@ -19,7 +19,6 @@ const N = slides.length;
 const COLORS = { gold: '#ffc247', mint: '#3ee6b8', coral: '#ff6b5a', ice: '#9db4ff', paper: '#f4f1ea' };
 const INK = '#07070a';
 const CFG = [
-  { b: '#7a3cff', o1: [78, 40, 1.1], o2: [14, 86, 1] },
   { b: '#4a3cff', o1: [28, 42, 1],   o2: [82, 80, 1] },
   { b: '#1c2a7a', o1: [40, 50, 1.2], o2: [88, 18, .8] },
   { b: '#4a3cff', o1: [80, 55, 1],   o2: [8, 20, 1] },
@@ -169,12 +168,12 @@ function risingParticles(count, speedMul) {
     }
   };
 }
-fx[1] = risingParticles(95, 1);
-fx[6] = risingParticles(55, 1.1);
-fx[7] = risingParticles(70, 1.4);
+fx[0] = risingParticles(95, 1);
+fx[5] = risingParticles(55, 1.1);
+fx[6] = risingParticles(70, 1.4);
 
 /* — slide 3: the lights go out — */
-fx[2] = (() => {
+fx[1] = (() => {
   let dots = [], W = 0, H = 0, seeds = [];
   const GAP = 38;
   function build() {
@@ -207,7 +206,7 @@ fx[2] = (() => {
 })();
 
 /* — slide 4: economy chart (SVG, driven from JS) — */
-fx[3] = (() => {
+fx[2] = (() => {
   const X0 = 50, X1 = 730, Y0 = 400, Y1 = 40;
   const edu = [10, 14, 19, 25, 31, 38, 44, 37, 40, 48, 58, 69, 81, 94];
   const res = [10, 15, 21, 28, 35, 42, 47, 21, 19, 21, 23, 25, 26, 27];
@@ -259,7 +258,7 @@ fx[3] = (() => {
 })();
 
 /* — slide 5: chaos → system (particles snap to a lattice) — */
-fx[4] = (() => {
+fx[3] = (() => {
   let P = [], T = [], L = [], W = 0, H = 0, R = 0, cx = 0, cy = 0;
   function build() {
     const narrow = W < 900;
@@ -322,7 +321,7 @@ fx[4] = (() => {
 })();
 
 /* — slide 6: social elevator (SVG, driven from JS) — */
-fx[5] = (() => {
+fx[4] = (() => {
   const FL = 100, BASE = 438, NF = 5;
   const floors = $('#lFloors'), cab = $('#lCab'), cable = $('#lCable'), burst = $('#lBurst'), top = $('.l-lab--top');
   for (let i = 0; i < NF; i++) {
@@ -373,9 +372,9 @@ fx[5] = (() => {
 
 /* ───────────────── presenter script ───────────────── */
 const NOTES = [
-  `<p><b>Hook.</b> Play the short video (“You Don’t Need College”) at the very start, then move on to the next slide.</p>
+  `<p><b>Hook.</b> Play the short video (“You Don’t Need College”) right at the start.</p>
+   <p><b>Greeting.</b> “Good day, everyone! Have any of you ever asked yourselves why we even need education, or maybe thought that it is not necessary at all? So today, I want to share three reasons why it is the most valuable asset we have.”</p>
    <p><b>Tip:</b> after pressing play, click on an empty part of the slide (or use the arrow buttons) so the keyboard works again.</p>`,
-  `<p><b>Greeting.</b> “Good day, everyone! Have any of you ever asked yourselves why we even need education, or maybe thought that it is not necessary at all? So today, I want to share three reasons why it is the most valuable asset we have.”</p>`,
   `<p><b>Opening question.</b> “What would our world look like without education?”</p>
    <p>Let the silence do some work: the lights go out one by one. No medicine, no technology, no economy.</p>`,
   `<p><b>Argument 1 · Education builds a strong and resilient economy.</b></p>
@@ -434,7 +433,7 @@ function activate(i) {
   shown = i; enterT = performance.now();
   sizeCanvas(i);
   fx[i] && fx[i].reset && fx[i].reset();
-  if (i === 0 || i === 1) loadVideo();
+  if (i === 0) loadVideo();
 }
 
 function go(to) {
@@ -484,7 +483,6 @@ addEventListener('touchend', e => {
 }, { passive: true });
 $('#next').addEventListener('click', () => go(cur + 1));
 $('#prev').addEventListener('click', () => go(cur - 1));
-$('#brand').addEventListener('click', e => { e.preventDefault(); go(0); });
 $('#notesBtn').addEventListener('click', () => toggleNotes());
 $('#notesClose').addEventListener('click', () => toggleNotes(false));
 function toggleFs() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
