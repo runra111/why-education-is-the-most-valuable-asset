@@ -418,7 +418,7 @@ function updateHud(i) {
 
 /* ───────────────── video helpers ───────────────── */
 const yt = $('#ytFrame');
-const poster = $('.phone__poster');
+function loadVideo() { if (yt && !yt.src) yt.src = yt.dataset.src; }
 function pauseVideo() { try { yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'); } catch (e) {} }
 
 /* ── video: opens to (almost) full screen on play, folds back when it ends ── */
@@ -427,18 +427,7 @@ const veil = document.createElement('div');
 veil.className = 'veil';
 veil.innerHTML = '<button class="nav veil__x" type="button" aria-label="Close video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
 slides[0].appendChild(veil);
-let vFull = false, vBusy = false, vGhost = null, vState = null, vWatch = 0;
-// the player is only created when the poster is clicked, and autoplays at once:
-// it never goes through YouTube's own paused/play state, so no pause icon is drawn over the video
-function startVideo() {
-  if (vFull || vBusy || cur !== 0) return;
-  poster.classList.add('loading');
-  yt.src = yt.dataset.src + '&autoplay=1';
-  expandVideo();
-  clearTimeout(vWatch);
-  vWatch = setTimeout(() => { if (vState !== 1) poster.classList.add('hide'); }, 6000);   // fallback: let the user press YouTube's own play
-}
-function unloadVideo() { clearTimeout(vWatch); yt.removeAttribute('src'); vState = null; poster.classList.remove('hide', 'loading'); }
+let vFull = false, vBusy = false, vGhost = null, vState = null;
 const V_MS = 900;
 const setBox = (el, r) => { el.style.left = r.left + 'px'; el.style.top = r.top + 'px'; el.style.width = r.width + 'px'; el.style.height = r.height + 'px'; };
 function vTarget() {
@@ -453,7 +442,6 @@ function expandVideo() {
   vGhost.style.width = r.width + 'px'; vGhost.style.height = r.height + 'px';
   phone.before(vGhost);
   phone.classList.add('is-fixed'); setBox(phone, r); void phone.offsetWidth;
-  yt.blur(); window.focus();   // the shield covers the player: no hover overlay, keys (Esc) reach the page
   document.body.classList.add('vfull'); veil.classList.add('on');
   setBox(phone, vTarget());
   setTimeout(() => { vBusy = false; }, V_MS);
@@ -467,14 +455,12 @@ function collapseVideo(instant) {
     ['left', 'top', 'width', 'height'].forEach(k => phone.style.removeProperty(k));
     if (vGhost) { vGhost.remove(); vGhost = null; }
     vBusy = false;
-    unloadVideo();
   };
   if (instant) { done(); return; }
   setBox(phone, vGhost.getBoundingClientRect());
   setTimeout(done, V_MS + 60);
 }
-poster.addEventListener('click', startVideo);
-function closeVideoByHand() { collapseVideo(); }
+function closeVideoByHand() { collapseVideo(); pauseVideo(); vState = 2; }
 veil.addEventListener('click', closeVideoByHand);
 // listen to the YouTube player: 1 = playing, 0 = ended
 yt.addEventListener('load', () => { try { yt.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'); } catch (e) {} });
@@ -487,8 +473,7 @@ addEventListener('message', e => {
   const st = d.event === 'onStateChange' ? d.info : (d.event === 'infoDelivery' && d.info && typeof d.info.playerState === 'number' ? d.info.playerState : null);
   if (st === null || st === vState) return;
   vState = st;
-  if (st === 1) { clearTimeout(vWatch); poster.classList.add('hide'); }
-  else if (st === 0) collapseVideo();
+  if (st === 1) expandVideo(); else if (st === 0) collapseVideo();
 });
 
 /* ───────────────── navigation ───────────────── */
@@ -503,6 +488,7 @@ function activate(i) {
   shown = i; enterT = performance.now();
   sizeCanvas(i);
   fx[i] && fx[i].reset && fx[i].reset();
+  if (i === 0) loadVideo();
 }
 
 function go(to) {

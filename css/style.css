@@ -111,20 +111,6 @@ ul, ol { list-style: none; }
 .phone-ph { justify-self: center; flex: none; }
 .slide .phone.is-fixed { position: fixed; z-index: 6; margin: 0; aspect-ratio: auto; transition: left .9s var(--e2), top .9s var(--e2), width .9s var(--e2), height .9s var(--e2), border-radius .9s var(--e2); }
 .phone.is-fixed .phone__screen { border-radius: inherit; }
-.phone__screen { position: relative; }
-.phone__shield { position: absolute; inset: 0; z-index: 2; }
-.phone__poster { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4vh; border: 0; cursor: pointer; color: var(--paper);
-  background: radial-gradient(90% 60% at 50% 18%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%), radial-gradient(80% 60% at 50% 100%, color-mix(in srgb, var(--accent2) 45%, transparent), transparent 70%), linear-gradient(180deg, #14111f, #07070a);
-  transition: opacity .6s ease; }
-.phone__poster.hide { opacity: 0; pointer-events: none; }
-.pp__btn { width: 34%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--ink); box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent), 0 10px 40px rgba(0, 0, 0, .5); animation: ppulse 2.4s ease-out infinite; transition: transform .35s var(--e); }
-.pp__btn svg { width: 46%; fill: currentColor; margin-left: 6%; }
-.phone__poster:hover .pp__btn { transform: scale(1.08); }
-.phone__poster.loading { cursor: default; }
-.phone__poster.loading .pp__btn { animation: ploading 1s ease-in-out infinite; }
-.phone__poster.loading .pp__txt { opacity: .5; }
-@keyframes ppulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent), 0 10px 40px rgba(0, 0, 0, .5); } 70%, 100% { box-shadow: 0 0 0 26px transparent, 0 10px 40px rgba(0, 0, 0, .5); } }
-@keyframes ploading { 50% { transform: scale(.92); opacity: .7; } }
 .phone.is-fixed .phone__glow { inset: -4%; opacity: .9; }
 .veil { position: fixed; inset: 0; z-index: 5; background: radial-gradient(circle at 50% 50%, rgba(22, 18, 8, .84), rgba(0, 0, 0, .97)); backdrop-filter: blur(16px); opacity: 0; pointer-events: none; transition: opacity .8s ease; cursor: pointer; }
 .veil.on { opacity: 1; pointer-events: auto; }
