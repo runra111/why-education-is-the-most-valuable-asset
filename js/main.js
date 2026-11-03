@@ -19,8 +19,8 @@ const N = slides.length;
 const COLORS = { gold: '#ffc247', mint: '#3ee6b8', coral: '#ff6b5a', ice: '#9db4ff', paper: '#f4f1ea' };
 const INK = '#07070a';
 const CFG = [
-  { b: '#4a3cff', o1: [28, 42, 1],   o2: [82, 80, 1] },
   { b: '#7a3cff', o1: [78, 40, 1.1], o2: [14, 86, 1] },
+  { b: '#4a3cff', o1: [28, 42, 1],   o2: [82, 80, 1] },
   { b: '#1c2a7a', o1: [40, 50, 1.2], o2: [88, 18, .8] },
   { b: '#4a3cff', o1: [80, 55, 1],   o2: [8, 20, 1] },
   { b: '#0b5fff', o1: [72, 50, 1],   o2: [12, 82, 1] },
@@ -169,7 +169,7 @@ function risingParticles(count, speedMul) {
     }
   };
 }
-fx[0] = risingParticles(95, 1);
+fx[1] = risingParticles(95, 1);
 fx[6] = risingParticles(55, 1.1);
 fx[7] = risingParticles(70, 1.4);
 
@@ -373,9 +373,9 @@ fx[5] = (() => {
 
 /* ───────────────── presenter script ───────────────── */
 const NOTES = [
-  `<p><b>Greeting.</b> “Good day, everyone! Have any of you ever asked yourselves why we even need education, or maybe thought that it is not necessary at all? So today, I want to share three reasons why it is the most valuable asset we have.”</p>`,
-  `<p><b>Hook.</b> Play the short video (“You Don’t Need College”), then move on to the next slide.</p>
+  `<p><b>Hook.</b> Play the short video (“You Don’t Need College”) at the very start, then move on to the next slide.</p>
    <p><b>Tip:</b> after pressing play, click on an empty part of the slide (or use the arrow buttons) so the keyboard works again.</p>`,
+  `<p><b>Greeting.</b> “Good day, everyone! Have any of you ever asked yourselves why we even need education, or maybe thought that it is not necessary at all? So today, I want to share three reasons why it is the most valuable asset we have.”</p>`,
   `<p><b>Opening question.</b> “What would our world look like without education?”</p>
    <p>Let the silence do some work: the lights go out one by one. No medicine, no technology, no economy.</p>`,
   `<p><b>Argument 1 · Education builds a strong and resilient economy.</b></p>
@@ -444,7 +444,7 @@ function go(to) {
   const dir = to > cur ? 1 : -1;
   const from = cur;
   slides[from].classList.add('is-leaving');
-  if (from === 1) pauseVideo();
+  if (from === 0) pauseVideo();
   setTheme(to);
   runLiquid(dir, accentOf(to), () => {
     cur = to; activate(to); updateHud(to);
@@ -517,7 +517,6 @@ function boot() {
   lx.fillStyle = INK; lx.fillRect(0, 0, LW, LH);
   runLiquid(1, accentOf(cur), () => { activate(cur); }, () => { busy = false; if (queued !== null) { const q = queued; queued = null; go(q); } }, true);
   requestAnimationFrame(t => { last = t; loop(t); });
-  setTimeout(loadVideo, 2500);
 }
 const ready = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]) : Promise.resolve();
 ready.then(boot);
