@@ -88,11 +88,11 @@ ul, ol { list-style: none; }
 .slide:not(.is-active) *, .slide:not(.is-active) *::before, .slide:not(.is-active) *::after { transition: none !important; animation: none !important; }
 
 /* ───────── slide 1 · title ───────── */
-.ghost { position: absolute; right: -2vw; top: 50%; transform: translateY(-58%); pointer-events: none; font-family: var(--display); font-weight: 800; font-size: 31vw; line-height: .8; letter-spacing: -.05em;
+.ghost { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); pointer-events: none; white-space: nowrap; font-family: var(--display); font-weight: 800; font-size: 25vw; line-height: .8; letter-spacing: .035em; padding-left: .035em;
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent2) 6%, transparent) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; transition: opacity 2s ease .4s; }
 .slide.is-in .ghost { opacity: 1; }
 .ghost span { display: block; animation: drift 14s ease-in-out infinite alternate; }
-@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-4vw); } }
+@keyframes drift { from { transform: translateX(-1.2vw); } to { transform: translateX(1.2vw); } }
 
 .ticker { position: absolute; left: 0; right: 0; bottom: 74px; overflow: hidden; white-space: nowrap; opacity: .9; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 .ticker__in { display: inline-flex; gap: 2.4vw; align-items: center; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 3.4rem); text-transform: uppercase; letter-spacing: -.02em; animation: marquee 38s linear infinite; }
