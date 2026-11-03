@@ -113,12 +113,27 @@ ul, ol { list-style: none; }
 
 /* ───────── slide 3 · without education ───────── */
 .shade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(55% 55% at 36% 50%, rgba(7, 7, 10, .82), rgba(7, 7, 10, 0) 72%); }
-.fadelist { display: flex; flex-wrap: wrap; gap: 1.6vw; margin-top: 2vh; color: var(--muted); }
-.fadelist li { position: relative; opacity: 0; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; }
-.fadelist li::after { content: ''; position: absolute; left: 10px; right: 10px; top: 50%; height: 1px; background: var(--coral); transform: scaleX(0); transform-origin: left; }
-.fadelist li::after { display: none; }
-.slide.is-in .fadelist li { animation: appear .8s var(--e) calc(1.7s + var(--k) * .12s) forwards; }
-@keyframes appear { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.wrap--left { right: auto; width: 50vw; }
+.display--s3 { font-size: clamp(2.3rem, 5.4vw, 5.8rem); }
+.icons { position: absolute; right: 6vw; top: 50%; transform: translateY(-50%); width: 38vw; display: grid; grid-template-columns: repeat(6, 1fr); gap: 2.6vw 1.8vw; }
+.ic { grid-column: span 2; opacity: 0; text-align: center; }
+.ic:nth-child(4) { grid-column: 2 / span 2; }
+.ic:nth-child(5) { grid-column: 4 / span 2; }
+.ic__box { position: relative; aspect-ratio: 1; display: grid; place-items: center; border: 1.5px solid rgba(244, 241, 234, .22); border-radius: 22%; background: rgba(244, 241, 234, .04); color: var(--paper); }
+.ic__g { width: 58%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ic__x { position: absolute; inset: 12%; width: 76%; height: 76%; fill: none; stroke: var(--coral); stroke-width: 4.5; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(255, 107, 90, .7)); }
+.ic__x path { stroke-dasharray: 80; stroke-dashoffset: 80; }
+.ic span { display: block; margin-top: 1.4vh; font-size: clamp(.78rem, 1.05vw, 1.05rem); letter-spacing: .12em; color: var(--paper); }
+.slide.is-in .ic { animation: appear .8s var(--e) calc(1.6s + var(--k) * .14s) forwards; }
+.slide.is-in .ic__x path { animation: strike .55s var(--e2) calc(4.4s + var(--k) * .6s) forwards; }
+.slide.is-in .ic__box { animation: boxdim .8s ease calc(4.5s + var(--k) * .6s) forwards; }
+.slide.is-in .ic__g { animation: icdim .8s ease calc(4.5s + var(--k) * .6s) forwards; }
+.slide.is-in .ic span { animation: lbldim .8s ease calc(4.5s + var(--k) * .6s) forwards; }
+@keyframes appear { from { opacity: 0; transform: translateY(18px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes strike { to { stroke-dashoffset: 0; } }
+@keyframes boxdim { to { border-color: rgba(255, 107, 90, .6); background: rgba(255, 107, 90, .08); } }
+@keyframes icdim { to { opacity: .4; } }
+@keyframes lbldim { to { color: var(--coral); text-decoration: line-through; text-decoration-thickness: 2px; } }
 
 /* ───────── argument slides ───────── */
 .num { font-family: var(--display); font-weight: 800; font-size: clamp(4rem, 9vw, 8.4rem); line-height: .8; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px var(--accent); }
