@@ -111,6 +111,9 @@ ul, ol { list-style: none; }
 .phone-ph { justify-self: center; flex: none; }
 .slide .phone.is-fixed { position: fixed; z-index: 6; margin: 0; aspect-ratio: auto; transition: left .9s var(--e2), top .9s var(--e2), width .9s var(--e2), height .9s var(--e2), border-radius .9s var(--e2); }
 .phone.is-fixed .phone__screen { border-radius: inherit; }
+.phone__screen { position: relative; }
+.phone__shield { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
+.phone.is-fixed .phone__shield { cursor: default; }
 .phone.is-fixed .phone__glow { inset: -4%; opacity: .9; }
 .veil { position: fixed; inset: 0; z-index: 5; background: radial-gradient(circle at 50% 50%, rgba(22, 18, 8, .84), rgba(0, 0, 0, .97)); backdrop-filter: blur(16px); opacity: 0; pointer-events: none; transition: opacity .8s ease; cursor: pointer; }
 .veil.on { opacity: 1; pointer-events: auto; }

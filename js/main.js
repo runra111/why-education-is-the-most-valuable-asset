@@ -442,6 +442,7 @@ function expandVideo() {
   vGhost.style.width = r.width + 'px'; vGhost.style.height = r.height + 'px';
   phone.before(vGhost);
   phone.classList.add('is-fixed'); setBox(phone, r); void phone.offsetWidth;
+  yt.blur(); window.focus();   // the shield covers the player: no hover overlay, keys (Esc) reach the page
   document.body.classList.add('vfull'); veil.classList.add('on');
   setBox(phone, vTarget());
   setTimeout(() => { vBusy = false; }, V_MS);
@@ -460,6 +461,12 @@ function collapseVideo(instant) {
   setBox(phone, vGhost.getBoundingClientRect());
   setTimeout(done, V_MS + 60);
 }
+// a transparent shield sits on the player: the click starts playback through the API,
+// so YouTube never shows its own pause/play overlay or hover controls over the video
+$('.phone__shield').addEventListener('click', () => {
+  if (vFull || vBusy) return;
+  try { yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'); } catch (e) {}
+});
 function closeVideoByHand() { collapseVideo(); pauseVideo(); vState = 2; }
 veil.addEventListener('click', closeVideoByHand);
 // listen to the YouTube player: 1 = playing, 0 = ended
