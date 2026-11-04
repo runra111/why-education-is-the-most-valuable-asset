@@ -174,7 +174,38 @@ fx[0] = risingParticles(95, 1);
 fx[5] = risingParticles(45, 1);
 fx[6] = risingParticles(60, 1.2);
 fx[7] = risingParticles(55, 1.1);
-fx[8] = risingParticles(90, 1.4);
+// finale: rising sparks plus a burst of colourful confetti right after "Thank you!" lands
+fx[8] = (() => {
+  const base = risingParticles(70, 1.2);
+  const COL = ['255,194,71', '255,107,90', '62,230,184', '157,180,255'];
+  let S = [], W = 0, H = 0, fired = false;
+  function burst() {
+    S = [];
+    for (let i = 0; i < 190; i++) {
+      const a = Math.random() * 6.283, v = rand(180, 760);
+      S.push({ x: W / 2, y: H * .5, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 140, r: rand(1.6, 4.2), c: COL[i % COL.length], life: rand(1.5, 3), t: 0 });
+    }
+  }
+  return {
+    resize(w, h) { W = w; H = h; base.resize(w, h); },
+    reset() { S = []; fired = false; },
+    draw(ctx, w, h, t, dt) {
+      base.draw(ctx, w, h, t, dt);
+      if (!fired && t > .45) { fired = true; burst(); }
+      ctx.globalCompositeOperation = 'lighter';
+      for (const s of S) {
+        s.t += dt; if (s.t > s.life) continue;
+        const k = Math.pow(.18, dt);
+        s.vx *= k; s.vy = s.vy * k + 240 * dt;
+        s.x += s.vx * dt; s.y += s.vy * dt;
+        const a = 1 - s.t / s.life;
+        ctx.fillStyle = `rgba(${s.c},${a})`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r * (.4 + a), 0, 6.283); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+  };
+})();
 
 /* — slide 3: the lights go out — */
 fx[1] = (() => {
