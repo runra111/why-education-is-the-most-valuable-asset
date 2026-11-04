@@ -24,8 +24,10 @@ const CFG = [
   { b: '#4a3cff', o1: [80, 55, 1],   o2: [8, 20, 1] },
   { b: '#0b5fff', o1: [72, 50, 1],   o2: [12, 82, 1] },
   { b: '#7a2bff', o1: [74, 60, 1],   o2: [10, 22, 1] },
-  { b: '#2a2a35', o1: [50, 50, 1.4], o2: [50, 50, 1.1] },
   { b: '#4a3cff', o1: [20, 72, 1],   o2: [86, 22, 1] },
+  { b: '#7a3cff', o1: [72, 42, 1.2], o2: [14, 82, 1] },
+  { b: '#2a2a35', o1: [50, 50, 1.4], o2: [50, 50, 1.1] },
+  { b: '#4a3cff', o1: [50, 56, 1.3], o2: [50, 24, 1] },
 ];
 const accentOf = i => COLORS[slides[i].dataset.accent] || COLORS.gold;
 const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -169,8 +171,10 @@ function risingParticles(count, speedMul) {
   };
 }
 fx[0] = risingParticles(95, 1);
-fx[5] = risingParticles(55, 1.1);
-fx[6] = risingParticles(70, 1.4);
+fx[5] = risingParticles(45, 1);
+fx[6] = risingParticles(60, 1.2);
+fx[7] = risingParticles(55, 1.1);
+fx[8] = risingParticles(90, 1.4);
 
 /* — slide 3: the lights go out — */
 fx[1] = (() => {
@@ -392,8 +396,10 @@ const NOTES = [
    <p><b>Why:</b> it creates fair opportunities where personal talent, discipline, and hard work matter much more than family wealth or social connections.</p>
    <p><b>Example:</b> in Kazakhstan, institutions like NIS, NU, and KazNU give full grants to bright students from ordinary families. A great role model is Mikhail Lomtadze (head of Kaspi.kz), who used his top education (including Harvard) as a springboard to build a huge tech company, and today his business actively hires graduates from these institutions based entirely on their talent and hard work.</p>
    <p><b>Conclusion:</b> therefore, accessible high-standard education serves as a true social elevator, proving that a young person’s future can be determined by their own abilities rather than their family’s background.</p>`,
+  `<p><b>To sum up.</b> “Quality education builds a strong economy, helps us organize information, and acts as a fair social elevator.”</p>`,
+  `<p><b>Closing statement.</b> “By supporting education today, we create a successful future for everyone.”</p>`,
   `<p><b>Photo slide (second to last).</b> Caption on the photo: “How do you like it, Elon Musk?” This is the answer to the video from the start of the talk.</p>`,
-  `<p><b>To sum up.</b> “Quality education builds a strong economy, helps us organize information, and acts as a fair social elevator. By supporting education today, we create a successful future for everyone.”</p>`,
+  `<p><b>Last slide.</b> Thank you!</p>`,
 ];
 const notes = $('#notes'), notesBody = $('#notesBody'), notesTitle = $('#notesTitle');
 function showNotes(i) { notesBody.innerHTML = NOTES[i] || ''; notesTitle.textContent = `Script · slide ${String(i + 1).padStart(2, '0')}`; }
